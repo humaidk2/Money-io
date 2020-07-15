@@ -1,6 +1,28 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useState } from "react"
+import { useRouter } from 'next/router'
+
 export default function Home() {
+    const router = useRouter()
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        fetch('http://localhost:8000/signin',
+        {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            body: JSON.stringify({"username": username,"password": password }),
+            credentials: 'include'
+        }).then((data)=> {
+            // data = data.json();
+            if(data.status === 200) {
+                console.log(data);
+                router.push('/transactions', undefined, { shallow: true });
+            }
+        } )
+    }
     return (
     <>
         <Head>
@@ -27,14 +49,14 @@ export default function Home() {
                         		</div>
                             </div>
                             <div className="form-bottom">
-			                    <form role="form" method="post" className="login-form" onSubmit="signIn">
+			                    <form role="form" method="post" className="login-form" onSubmit={handleSubmit}>
 			                    	<div className="form-group">
 			                    		<label className="sr-only" for="username">Username</label>
-			                        	<input type="text" name="username" placeholder="Username..." className="form-username form-control" id="form-username" />
+			                        	<input type="text" name="username" placeholder="Username..." className="form-username form-control" id="form-username" value={username} onChange={e => setUsername(e.target.value)}  />
 			                        </div>
 			                        <div className="form-group">
 			                        	<label className="sr-only" for="password">Password</label>
-			                        	<input type="password" name="password" placeholder="Password..." className="form-password form-control" id="form-password" />
+			                        	<input type="password" name="password" placeholder="Password..." className="form-password form-control" id="form-password" value={password} onChange={e => setPassword(e.target.value)}  />
 			                        </div>
 			                        <button type="submit" className="btn">Sign in</button>
 			                    </form>
