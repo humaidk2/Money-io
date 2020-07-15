@@ -1,6 +1,22 @@
 import Head from 'next/Head'
 import Link from 'next/Link'
+import { useState } from "react";
+
 export default function Home() {
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        console.log("username " + username + " email " + email);
+        fetch('http://localhost:8000/signup',
+        {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            body: JSON.stringify({"username": username,"email": email, "password": password }),
+            credentials: 'include'
+        });
+    }
     return (
     <>
     <Head>
@@ -27,14 +43,18 @@ export default function Home() {
                         		</div>
                             </div>
                             <div className="form-bottom">
-			                    <form role="form" action="" method="post" className="login-form">
+			                    <form role="form" action="" method="post" className="login-form" onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label className="sr-only" for="form-username">Username</label>
-                                        <input type="text" name="username" placeholder="Username..." className="form-username form-control" id="form-username" />
+                                        <input type="text" name="username" placeholder="Username..." className="form-username form-control" id="form-username" value={username} onChange={e => setUsername(e.target.value)} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="sr-only" for="form-email">Email</label>
+                                        <input type="text" name="email" placeholder="Email..." className="form-username form-control" id="form-email" value={email} onChange={e => setEmail(e.target.value)} />
                                     </div>
 			                        <div className="form-group">
 			                        	<label className="sr-only" for="form-password">Password</label>
-			                        	<input type="password" name="password" placeholder="Password..." className="form-password form-control" id="form-password" />
+			                        	<input type="password" name="password" placeholder="Password..." className="form-password form-control" id="form-password"value={password} onChange={e => setPassword(e.target.value)} />
 			                        </div>
 			                        <button type="submit" className="btn">Sign up</button>
 			                    </form>
