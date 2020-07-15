@@ -17,7 +17,7 @@ const SpendingList = (props) => (
       {props.list.map(owes => <SpendingListEntry entry={owes} />)}
       </tbody>
     </table>
-    <SpendingForm submit={props.submit}/>
+    <SpendingForm />
   </div>
 );
 
