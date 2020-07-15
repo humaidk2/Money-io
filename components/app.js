@@ -1,6 +1,8 @@
 import SpendingList from './spending/spendingList'
 import Sidebar from './sidebar'
 import OwesList from './owes/owesListEntry'
+// TODO: Convert to functional
+// TODO: Clean code
 class App extends React.Component {
   constructor(props) {
     super(props);
