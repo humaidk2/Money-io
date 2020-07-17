@@ -22,6 +22,9 @@ const  SpendingForm = (props) => {
         </select>
       </div>
       <div className="form-group">
+      <input type="date" id="birthday" name="birthday" />
+      </div>
+      <div className="form-group">
         <input type="text" className="form-control" placeholder="Spending"/>
       </div>
       <div className="input-group">
