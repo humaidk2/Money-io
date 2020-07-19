@@ -7,7 +7,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.click = this.click.bind(this);
-    this.submit = this.submit.bind(this);
     this.submitOwesLoans = this.submitOwesLoans.bind(this);
     this.state = {
       signedIn: false,
@@ -52,30 +51,7 @@ class App extends React.Component {
     }
   }
 
-  submit(e) {
-    e.preventDefault();
-
-    var spendingData = {
-      category: e.target.children[1].children[0].children[e.target.children[1].children[0].selectedIndex].value,
-      title: e.target.children[2].children[0].value,
-      amount: '$' + e.target.children[3].children[1].value,
-      url: 'transactions'
-    };
-
-    postReq(spendingData);
-
-    this.props.getReq({url: 'transactions'}, this.loadTrans.bind(this));
-
-    if (this.state.curr.type.name === 'SpendingList') {
-      this.setState({
-        curr: (<SpendingList list={this.state.transactions} submit={this.submit} />)
-      });
-    } else {
-      this.setState({
-        curr: (<OwesList list={this.state.debts} submitOwesLoans={this.submitOwesLoans}/>)
-      });
-    }
-  }
+ 
 
   submitOwesLoans(e) {
     e.preventDefault();
