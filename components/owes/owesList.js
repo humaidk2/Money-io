@@ -1,7 +1,8 @@
 import OwesListEntry from './owesListEntry'
 import DuesForm from './duesForm'
 import LoansForm from './loansForm'
-const OwesList = (props) => (
+const OwesList = (props) => {
+  return(
   <div className="owes">
     <h2>Dues</h2>
     <table className="table">
@@ -18,10 +19,11 @@ const OwesList = (props) => (
       {props.list.map(owes => <OwesListEntry entry={owes} />)}
       </tbody>
     </table>
-    <DuesForm submitOwesLoans={props.submitOwesLoans}/>
+    <DuesForm />
     <br />
-    <LoansForm submitOwesLoans={props.submitOwesLoans}/>
+    <LoansForm />
   </div>
-)
+  );
+  }
 
 export default OwesList
