@@ -14,7 +14,9 @@ const SpendingList = (props) => (
         </tr>
       </thead>
       <tbody>
-      {props.list.map(owes => <SpendingListEntry entry={owes} />)}
+        {console.log("hello " + JSON.stringify(props.list))}
+        {console.log(props.list)}
+      {props.list.map(owes => <SpendingListEntry key={owes.id} entry={owes} />)}
       </tbody>
     </table>
     <SpendingForm />
