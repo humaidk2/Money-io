@@ -1,33 +1,26 @@
 import SpendingList from './spending/spendingList'
 import Sidebar from './sidebar'
-import OwesList from './owes/owesListEntry'
-class App extends React.Component {
+import OwesList from './owes/owesList'
+// TODO: Convert to functional component
+class Debts extends React.Component {
   constructor(props) {
     super(props);
-    this.click = this.click.bind(this);
-    this.submit = this.submit.bind(this);
-    this.state = {
-      signedIn: false,
-      data: this.props.data,
-      transactions: [],
-      debts: []
-    };
   }
 
-  loadTrans(data) {
-    this.setState({
-      transactions: data.transaction
-    });
+  // loadTrans(data) {
+  //   this.setState({
+  //     transactions: data.transaction
+  //   });
 
-    this.setState({
-      curr: (<SpendingList list={this.state.transactions} submit={this.submit} />)
-    });
-  }
+  //   this.setState({
+  //     curr: (<SpendingList list={this.state.transactions} submit={this.submit} />)
+  //   });
+  // }
 
 
-  componentDidMount() {
-    this.props.getReq({url: 'localhost:8000/transactions'}, this.loadTrans.bind(this));
-  }
+  // componentDidMount() {
+  //   this.props.getReq({url: 'localhost:8000/transactions'}, this.loadTrans.bind(this));
+  // }
 
 
   submit(e) {
@@ -42,11 +35,21 @@ class App extends React.Component {
         </div>
         <div id='page-content-wrapper'>
           <h1 className='appTitle'><strong>Money</strong>.io</h1>
-          <OwesList list={this.state.debts} submitOwesLoans={this.submitOwesLoans}/>
+          <OwesList list={[]} />
         </div>
+        <style global jsx>
+        {`
+        body {
+            background: white;
+        }
+        #wrapper {
+            background: white;
+        }
+        `}
+        </style>
       </div>
     );
   }
 
 }
-export default App
+export default Debts
