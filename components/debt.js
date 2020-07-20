@@ -20,7 +20,7 @@ export default function Debts(props) {
       </div>
     );
   if (!data) return <div>Loading...</div>;
-  if ((data && !data.Message) || error) {
+  if (data && !data.Message) {
     router.push("/signin", undefined, { shallow: true });
   }
   return (
