@@ -1,55 +1,44 @@
-import SpendingList from './spending/spendingList'
-import Sidebar from './sidebar'
-import OwesList from './owes/owesList'
+import SpendingList from "./spending/spendingList";
+import Sidebar from "./sidebar";
+import OwesList from "./owes/owesList";
+import { useRouter } from "next/router";
+
+import useSWR from "swr";
 // TODO: Convert to functional component
-class Debts extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  // loadTrans(data) {
-  //   this.setState({
-  //     transactions: data.transaction
-  //   });
-
-  //   this.setState({
-  //     curr: (<SpendingList list={this.state.transactions} submit={this.submit} />)
-  //   });
-  // }
-
-
-  // componentDidMount() {
-  //   this.props.getReq({url: 'localhost:8000/transactions'}, this.loadTrans.bind(this));
-  // }
-
-
-  submit(e) {
-    e.preventDefault();
-
-  }
-  render() {
-    return (
-      <div id="wrapper" className="app">
-        <div id='sidebar-wrapper'>
-          <Sidebar />
-        </div>
-        <div id='page-content-wrapper'>
-          <h1 className='appTitle'><strong>Money</strong>.io</h1>
-          <OwesList list={[]} />
-        </div>
-        <style global jsx>
-        {`
-        body {
-            background: white;
-        }
-        #wrapper {
-            background: white;
-        }
-        `}
-        </style>
-      </div>
+export default function Debts(props) {
+  const fetcher = (url) =>
+    fetch(url, { method: "GET", credentials: "include" }).then((res) =>
+      res.json()
     );
+  const router = useRouter();
+  const url = "http://localhost:8000/debts";
+  const { data, error } = useSWR(url, fetcher);
+  if (error) return <div>failed to load{console.log("damn" + error)}</div>;
+  if (!data) return <div>Loading...</div>;
+  if (data && !data.Message) {
+    router.push("/signin", undefined, { shallow: true });
   }
-
+  return (
+    <div id="wrapper" className="app">
+      <div id="sidebar-wrapper">
+        <Sidebar />
+      </div>
+      <div id="page-content-wrapper">
+        <h1 className="appTitle">
+          <strong>Money</strong>.io
+        </h1>
+        {data && data.Message && <OwesList list={data.debts} />}
+      </div>
+      <style global jsx>
+        {`
+          body {
+            background: white;
+          }
+          #wrapper {
+            background: white;
+          }
+        `}
+      </style>
+    </div>
+  );
 }
-export default Debts
