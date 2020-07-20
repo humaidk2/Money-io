@@ -16,7 +16,7 @@ const OwesList = (props) => {
         </tr>
       </thead>
       <tbody>
-      {props.list.map(owes => <OwesListEntry entry={owes} />)}
+      {props.list.map(owes => <OwesListEntry key={owes.id} entry={owes} />)}
       </tbody>
     </table>
     <DuesForm />
