@@ -13,9 +13,14 @@ export default function Debts(props) {
   const router = useRouter();
   const url = "http://localhost:8000/debts";
   const { data, error } = useSWR(url, fetcher);
-  if (error) return <div>failed to load{console.log("damn" + error)}</div>;
+  if (error)
+    return (
+      <div>
+        failed to load{router.push("/signin", undefined, { shallow: true })}
+      </div>
+    );
   if (!data) return <div>Loading...</div>;
-  if (data && !data.Message) {
+  if ((data && !data.Message) || error) {
     router.push("/signin", undefined, { shallow: true });
   }
   return (
