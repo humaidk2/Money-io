@@ -2,11 +2,14 @@
 // and an action and returns the next state
 const debt = (state, action) => {
   switch (action.type) {
-    case "ADD_DEBT":
+    case "ADD_DEBT_SUCCESS":
       return {
-        id: action.id,
-        title: action.title,
-        amount: action.amount,
+        id: action.response.id,
+        person: action.response.person,
+        amount: action.response.amount,
+        type: action.response.type,
+        description: action.response.description,
+        date: action.response.date,
       };
     default:
       return state;
@@ -15,7 +18,9 @@ const debt = (state, action) => {
 
 const debts = (state = [], action) => {
   switch (action.type) {
-    case "ADD_DEBT":
+    case "FETCH_DEBTS_SUCCESS":
+      return action.response.debts;
+    case "ADD_DEBT_SUCCESS":
       return [...state, debt(undefined, action)];
     case "DELETE_DEBT":
       return state.filter((t) => t.id != action.id);
@@ -25,7 +30,3 @@ const debts = (state = [], action) => {
 };
 
 export default debts;
-
-// do a fetch request
-// if it is successful dispatch add transaction
-// if not
