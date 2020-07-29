@@ -1,27 +1,56 @@
-import SpendingForm from './spendingForm'
-import SpendingListEntry from './SpendingListEntry'
+import SpendingForm from "./spendingForm";
+import SpendingListEntry from "./SpendingListEntry";
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import * as actions from "../../actions/transactions";
 
-const SpendingList = (props) => (
-  <div className="spending">
-    <h2>Transactions</h2>
-    <table className="table">
-      <thead id="spending-head">
-        <tr>
-          <th>Category</th>
-          <th>Title</th>
-          <th>Amount</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {console.log("hello " + JSON.stringify(props.list))}
-        {console.log(props.list)}
-      {props.list.map(owes => <SpendingListEntry key={owes.id} entry={owes} />)}
-      </tbody>
-    </table>
-    <SpendingForm />
-  </div>
-);
+// note if you dont pass the action creators through
+// connect, they will not have access to dispatch
+// because we didn't subscribe to store and stuff...
+const SpendingList = ({ list, fetchTransactions, deleteTransaction }) => {
+  useEffect(() => {
+    console.log("hello");
+    fetchTransactions();
+  }, []);
+  return (
+    <div className="spending">
+      <h2>Transactions</h2>
+      <table className="table">
+        <thead id="spending-head">
+          <tr>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {list.map((transaction) => (
+            <SpendingListEntry
+              key={transaction.id}
+              onDeleteClick={() => deleteTransaction(transaction.id)}
+              entry={transaction}
+            />
+          ))}
+        </tbody>
+      </table>
+      <SpendingForm />
+    </div>
+  );
+};
 
-
-export default SpendingList
+// by default connect passes dispatch
+// we could add mapStateToProps or mapDispatchToProps
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    list: state.transactions,
+  };
+};
+// const mapDispatchToProps = (dispatch) => ({
+//   onDeleteClick(id) {
+//     dispatch(deleteTransaction(id));
+//   },
+// });
+export default connect(mapStateToProps, actions)(SpendingList);
