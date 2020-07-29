@@ -1,4 +1,4 @@
-export const deleteTransaction = (id) => {
+export const deleteDebt = (id) => {
   return fetch("http://localhost:8000/deleteDebts", {
     headers: { "Content-Type": "application/json" },
     method: "POST",
@@ -9,7 +9,7 @@ export const deleteTransaction = (id) => {
   }).then((response) => response.json());
 };
 
-export const fetchTransactions = () => {
+export const fetchDebts = () => {
   return fetch("http://localhost:8000/debts", {
     headers: { "Content-Type": "application/json" },
     method: "GET",
@@ -17,7 +17,7 @@ export const fetchTransactions = () => {
   }).then((response) => response.json());
 };
 
-export const addTransaction = (type, person, amount, description) => {
+export const addDebt = (type, person, amount, description) => {
   return fetch("http://localhost:8000/debts", {
     headers: { "Content-Type": "application/json" },
     method: "POST",

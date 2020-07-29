@@ -1,6 +1,6 @@
 const SpendingListEntry = (props) => {
   const { id, category, title, amount, created_at } = props.entry;
-  const { onDeleteClick } = this.props;
+  const { onDeleteClick } = props;
   return (
     <tr>
       <td>

@@ -22,8 +22,8 @@ const debts = (state = [], action) => {
       return action.response.debts;
     case "ADD_DEBT_SUCCESS":
       return [...state, debt(undefined, action)];
-    case "DELETE_DEBT":
-      return state.filter((t) => t.id != action.id);
+    case "DELETE_DEBT_SUCCESS":
+      return state.filter((d) => d.id != action.response.id);
     default:
       return state;
   }

@@ -23,11 +23,11 @@ const OwesList = ({ list, fetchDebts, deleteDebt }) => {
           </tr>
         </thead>
         <tbody>
-          {list.map((owes) => (
+          {list.map((debt) => (
             <OwesListEntry
-              key={owes.id}
-              onDeleteClick={() => deleteDebt(transaction.id)}
-              entry={owes}
+              key={debt.id}
+              onDeleteClick={() => deleteDebt(debt.id)}
+              entry={debt}
             />
           ))}
         </tbody>
