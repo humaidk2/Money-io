@@ -1,22 +1,13 @@
-export default function OwesListEntry(props) {
-  const deleteOwes = () => {
-    //TODO a post request to delete on props.entry.id
-    fetch("http://localhost:8000/deleteDebts", {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      body: JSON.stringify({
-        id: props.entry.id,
-      }),
-      credentials: "include",
-    });
-  };
+const OwesListEntry = (props) => {
+  const { id, person, type, amount, description, created_at } = props.entry;
+  const { onDeleteClick } = this.props;
   return (
     <tr>
-      <td>{props.entry.person}</td>
-      <td>{props.entry.description}</td>
-      <td>{props.entry.amount}</td>
-      <td>{moment(props.entry.created_at).fromNow()}</td>
-      <td>{props.entry.type}</td>
+      <td>{person}</td>
+      <td>{description}</td>
+      <td>{amount}</td>
+      <td>{moment(created_at).fromNow()}</td>
+      <td>{type}</td>
       <td>
         <div className="btn-group">
           <button
@@ -45,7 +36,11 @@ export default function OwesListEntry(props) {
               Bitcoin
             </a>
           </div>
-          <button type="button" onClick={deleteOwes} className="btn btn-danger">
+          <button
+            type="button"
+            onClick={onDeleteClick}
+            className="btn btn-danger"
+          >
             Delete
           </button>
         </div>
@@ -58,4 +53,6 @@ export default function OwesListEntry(props) {
       `}</style>
     </tr>
   );
-}
+};
+
+export default OwesListEntry;

@@ -1,7 +1,13 @@
 import OwesListEntry from "./owesListEntry";
 import DuesForm from "./duesForm";
-import LoansForm from "./loansForm";
-const OwesList = (props) => {
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import * as actions from "../../actions/debts";
+
+const OwesList = ({ list, fetchDebts, deleteDebt }) => {
+  useEffect(() => {
+    fetchDebts();
+  }, []);
   return (
     <div className="owes">
       <h2>Dues</h2>
@@ -17,8 +23,12 @@ const OwesList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.list.map((owes) => (
-            <OwesListEntry key={owes.id} entry={owes} />
+          {list.map((owes) => (
+            <OwesListEntry
+              key={owes.id}
+              onDeleteClick={() => deleteDebt(transaction.id)}
+              entry={owes}
+            />
           ))}
         </tbody>
       </table>
@@ -27,4 +37,12 @@ const OwesList = (props) => {
   );
 };
 
-export default OwesList;
+// by default connect passes dispatch
+// we could add mapStateToProps or mapDispatchToProps
+const mapStateToProps = (state) => {
+  return {
+    list: state.debts,
+  };
+};
+
+export default connect(mapStateToProps, actions)(OwesList);
