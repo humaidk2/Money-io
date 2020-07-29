@@ -7,9 +7,10 @@ import * as actions from "../../actions/transactions";
 // note if you dont pass the action creators through
 // connect, they will not have access to dispatch
 // because we didn't subscribe to store and stuff...
+// or you could call dispatch(action creator)
+// both seem to work
 const SpendingList = ({ list, fetchTransactions, deleteTransaction }) => {
   useEffect(() => {
-    console.log("hello");
     fetchTransactions();
   }, []);
   return (
@@ -43,14 +44,9 @@ const SpendingList = ({ list, fetchTransactions, deleteTransaction }) => {
 // by default connect passes dispatch
 // we could add mapStateToProps or mapDispatchToProps
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     list: state.transactions,
   };
 };
-// const mapDispatchToProps = (dispatch) => ({
-//   onDeleteClick(id) {
-//     dispatch(deleteTransaction(id));
-//   },
-// });
+
 export default connect(mapStateToProps, actions)(SpendingList);
