@@ -1,23 +1,15 @@
 import { useState } from "react";
+import { connect } from "react-redux";
+import { addDebt } from "../../actions/debts";
 
-export default function DuesForm(props) {
+const DuesForm = ({ dispatch }) => {
   const [type, setType] = useState("due");
   const [person, setPerson] = useState("");
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState(0);
   const formSubmit = (evt) => {
-    fetch("http://localhost:8000/debts", {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      body: JSON.stringify({
-        type,
-        person,
-        description,
-        amount,
-        date: new Date(),
-      }),
-      credentials: "include",
-    });
+    evt.preventDefault();
+    dispatch(addDebt(type, person, amount, description));
   };
   return (
     <form className="form-inline" onSubmit={formSubmit}>
@@ -73,4 +65,13 @@ export default function DuesForm(props) {
       </button>
     </form>
   );
-}
+};
+
+// we can pass maptStateToProps
+// that converts our redux state to props and passes them down
+// we can pass mapDispatchToProps
+// that passes down dispatch function
+// Basically connect converts our component to stateful
+
+// by default connect passes dispatch
+export default connect()(DuesForm);
