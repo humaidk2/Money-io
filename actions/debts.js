@@ -10,7 +10,7 @@ export const fetchDebts = () => (dispatch) => {
     },
     (error) => {
       dispatch({
-        type: "FETCH_DETBS_FAILURE",
+        type: "FETCH_DEBTS_FAILURE",
         message: error.message || "Something went wrong.",
       });
     }
