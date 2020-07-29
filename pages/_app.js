@@ -3,18 +3,12 @@ import "../styles/bootstrap_min.css";
 import "../styles/global.css";
 import "../styles/form-elements.css";
 import "../styles/style.css";
-import { Provider } from "react-redux";
-import configureStore from "../configureStore";
+import { wrapper } from "../configureStore";
 
-export default function App({ Component, pageProps }) {
-  const store = configureStore();
-
-  return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
-  );
-}
+const App = ({ Component, pageProps }) => {
+  return <Component {...pageProps} />;
+};
+export default wrapper.withRedux(App);
 
 // const reducerExample = (state = {}, action) => {
 //   switch (action.type) {
