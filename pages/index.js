@@ -1,8 +1,15 @@
-import Head from 'next/head'
-import App from '../components/app'
-import Request from '../components/requests'
+import Head from "next/head";
+import App from "../components/app";
+import Request from "../components/requests";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    // Always do navigations after the first render
+    router.push("/transactions", undefined, { shallow: true });
+  }, []);
   return (
     <div className="container">
       <Head>
@@ -15,5 +22,5 @@ export default function Home() {
       </Head>
       <App postReq={Request.postReq} getReq={Request.getReq} data={[]} />
     </div>
-  )
+  );
 }
