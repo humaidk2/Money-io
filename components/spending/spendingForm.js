@@ -1,26 +1,25 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { connect } from "react-redux";
+import { addTransaction } from "../../actions/transactions";
 
-const SpendingForm = (props) => {
-
-  const [category, setCategory] = useState("Restaurant")
-  const [title, setTitle] = useState("")
-  const [amount, setAmount] = useState(0.0)
+const SpendingForm = ({ dispatch }) => {
+  const [category, setCategory] = useState("Restaurant");
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState(0.0);
 
   const formSubmit = (evt) => {
-    //evt.preventDefault();
-    fetch('http://localhost:8000/transactions',
-    {
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST',
-        body: JSON.stringify({category, title, amount, date: new Date()}),
-        credentials: 'include'
-    });
-  }
+    evt.preventDefault();
+    dispatch(addTransaction(category, title, amount));
+  };
   return (
-    <form className='form-inline' onSubmit={formSubmit}>
+    <form className="form-inline" onSubmit={formSubmit}>
       <h3>Add Transaction</h3>
-      <div className='form-group'>
-        <select value={category}  onChange={e=> setCategory(e.target.value)} className="custom-select">
+      <div className="form-group">
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="custom-select"
+        >
           <option value="Restaurant">Restaurant</option>
           <option value="Groceries">Groceries</option>
           <option value="Transportation">Transportation</option>
@@ -32,15 +31,37 @@ const SpendingForm = (props) => {
         </select>
       </div>
       <div className="form-group">
-        <input type="text" onChange={e=> setTitle(e.target.value)} value={title} className="form-control" placeholder="Spending"/>
+        <input
+          type="text"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          className="form-control"
+          placeholder="Spending"
+        />
       </div>
       <div className="input-group">
         <div className="input-group-addon">$</div>
-        <input type="text" className="form-control"  onChange={e=> setAmount(e.target.value)}value={amount} id="exampleInputAmount" placeholder="Amount" />
+        <input
+          type="text"
+          className="form-control"
+          onChange={(e) => setAmount(e.target.value)}
+          value={amount}
+          id="exampleInputAmount"
+          placeholder="Amount"
+        />
       </div>
-      <button type="submit" className="btn btn-success">Submit</button>
-  </form>
+      <button type="submit" className="btn btn-success">
+        Submit
+      </button>
+    </form>
   );
-}
+};
 
-export default SpendingForm
+// we can pass maptStateToProps
+// that converts our redux state to props and passes them down
+// we can pass mapDispatchToProps
+// that passes down dispatch function
+// Basically connect converts our component to stateful
+
+// by default connect passes dispatch
+export default connect()(SpendingForm);
