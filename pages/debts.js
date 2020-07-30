@@ -1,7 +1,14 @@
-import Head from 'next/head'
-import Debts from '../components/debt'
+import Head from "next/head";
+import Debts from "../components/debt";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { useRouter } from "next/router";
 
-export default function Home() {
+const Home = ({ isLoggedIn }) => {
+  const router = useRouter();
+  useEffect(() => {
+    !isLoggedIn && router.push("/signin", undefined, { shallow: true });
+  });
   return (
     <div className="container">
       <Head>
@@ -14,5 +21,15 @@ export default function Home() {
       </Head>
       <Debts data={[]} />
     </div>
-  )
-}
+  );
+};
+
+// by default connect passes dispatch
+// we could add mapStateToProps or mapDispatchToProps
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.isLoggedIn,
+  };
+};
+
+export default connect(mapStateToProps)(Home);
