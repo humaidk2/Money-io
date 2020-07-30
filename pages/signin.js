@@ -1,26 +1,21 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import * as actions from "../actions/auth";
+import { connect } from "react-redux";
 
-export default function Home() {
+const Home = ({ isLoggedIn, signin }) => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    console.log("isloggedin" + isLoggedIn);
+    isLoggedIn && router.push("/transactions", undefined, { shallow: true });
+  });
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    fetch("http://localhost:8000/signin", {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      body: JSON.stringify({ username: username, password: password }),
-      credentials: "include",
-    }).then((data) => {
-      // data = data.json();
-      if (data.status === 200) {
-        console.log(data);
-        router.push("/transactions", undefined, { shallow: true });
-      }
-    });
+    signin(username, password);
   };
   return (
     <>
@@ -93,4 +88,15 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+// by default connect passes dispatch
+// we could add mapStateToProps or mapDispatchToProps
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    isLoggedIn: state.isLoggedIn,
+  };
+};
+
+export default connect(mapStateToProps, actions)(Home);
