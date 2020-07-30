@@ -16,7 +16,6 @@ const transaction = (state, action) => {
 // reducer means it takes the previous state
 // and an action and returns the next state
 const transactions = (state = [], action) => {
-  action.response && console.log(action.response.transaction);
   switch (action.type) {
     case "FETCH_TRANSACTIONS_SUCCESS":
       return action.response.transactions;
