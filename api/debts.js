@@ -6,7 +6,7 @@ export const deleteDebt = (id) => {
       id,
     }),
     credentials: "include",
-  }).then((response) => response.json());
+  });
 };
 
 export const fetchDebts = () => {
@@ -14,7 +14,7 @@ export const fetchDebts = () => {
     headers: { "Content-Type": "application/json" },
     method: "GET",
     credentials: "include",
-  }).then((response) => response.json());
+  });
 };
 
 export const addDebt = (type, person, amount, description) => {
@@ -29,5 +29,5 @@ export const addDebt = (type, person, amount, description) => {
       date: new Date(),
     }),
     credentials: "include",
-  }).then((response) => response.json());
+  });
 };
