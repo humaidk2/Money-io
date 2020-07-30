@@ -6,7 +6,7 @@ export const deleteTransaction = (id) => {
       id,
     }),
     credentials: "include",
-  }).then((response) => response.json());
+  });
 };
 
 export const fetchTransactions = () => {
@@ -14,7 +14,7 @@ export const fetchTransactions = () => {
     headers: { "Content-Type": "application/json" },
     method: "GET",
     credentials: "include",
-  }).then((response) => response.json());
+  });
 };
 
 export const addTransaction = (category, title, amount) => {
