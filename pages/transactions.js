@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 const Home = ({ isLoggedIn }) => {
   const router = useRouter();
   useEffect(() => {
-    !isLoggedIn && router.push("/signin", undefined, { shallow: true });
+    !isLoggedIn && router.push("/", undefined, { shallow: true });
   });
   return (
     <div className="container">
