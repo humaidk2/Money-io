@@ -42,6 +42,9 @@ const Home = ({ isLoggedIn }) => {
           body {
             color: white;
           }
+          h1 {
+            color: white;
+          }
           .container {
             color: white;
           }
