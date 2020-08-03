@@ -1,3 +1,4 @@
+import moment from "moment";
 const OwesListEntry = (props) => {
   const { id, person, type, amount, description, created_at } = props.entry;
   const { onDeleteClick } = props;

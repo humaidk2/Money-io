@@ -10,9 +10,8 @@ const Home = ({ isLoggedIn, signin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   useEffect(() => {
-    console.log("isloggedin" + isLoggedIn);
     isLoggedIn && router.push("/transactions", undefined, { shallow: true });
-  });
+  }, [isLoggedIn]);
   const handleSubmit = (evt) => {
     evt.preventDefault();
     signin(username, password);

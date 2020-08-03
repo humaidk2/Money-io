@@ -1,3 +1,4 @@
+import moment from "moment";
 const SpendingListEntry = (props) => {
   const { id, category, title, amount, created_at } = props.entry;
   const { onDeleteClick } = props;
