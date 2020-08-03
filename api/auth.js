@@ -1,5 +1,5 @@
 export const logout = () => {
-  return fetch("https://alluring-mammoth-cave-84100.herokuapp.com/logout", {
+  return fetch(process.env.MONEY_SERVER_URL + "/logout", {
     headers: { "Content-Type": "application/json" },
     method: "GET",
     credentials: "include",
@@ -7,7 +7,7 @@ export const logout = () => {
 };
 
 export const signup = (username, email, password) => {
-  return fetch("https://alluring-mammoth-cave-84100.herokuapp.com/signup", {
+  return fetch(process.env.MONEY_SERVER_URL + "/signup", {
     headers: { "Content-Type": "application/json" },
     method: "POST",
     body: JSON.stringify({
@@ -20,7 +20,7 @@ export const signup = (username, email, password) => {
 };
 
 export const signin = (username, password) => {
-  return fetch("https://alluring-mammoth-cave-84100.herokuapp.com/signin", {
+  return fetch(process.env.MONEY_SERVER_URL + "/signin", {
     headers: { "Content-Type": "application/json" },
     method: "POST",
     body: JSON.stringify({ username, password }),
@@ -29,12 +29,9 @@ export const signin = (username, password) => {
 };
 
 export const verifyEmail = (url) => {
-  return fetch(
-    "https://alluring-mammoth-cave-84100.herokuapp.com/verifyEmail" + url,
-    {
-      headers: { "Content-Type": "application/json" },
-      method: "GET",
-      credentials: "include",
-    }
-  );
+  return fetch(process.env.MONEY_SERVER_URL + "/verifyEmail" + url, {
+    headers: { "Content-Type": "application/json" },
+    method: "GET",
+    credentials: "include",
+  });
 };

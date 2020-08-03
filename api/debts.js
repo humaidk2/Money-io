@@ -1,19 +1,16 @@
 export const deleteDebt = (id) => {
-  return fetch(
-    "https://alluring-mammoth-cave-84100.herokuapp.com/deleteDebts",
-    {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      body: JSON.stringify({
-        id,
-      }),
-      credentials: "include",
-    }
-  );
+  return fetch(process.env.MONEY_SERVER_URL + "/deleteDebts", {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    body: JSON.stringify({
+      id,
+    }),
+    credentials: "include",
+  });
 };
 
 export const fetchDebts = () => {
-  return fetch("https://alluring-mammoth-cave-84100.herokuapp.com/debts", {
+  return fetch(process.env.MONEY_SERVER_URL + "/debts", {
     headers: { "Content-Type": "application/json" },
     method: "GET",
     credentials: "include",
@@ -21,7 +18,7 @@ export const fetchDebts = () => {
 };
 
 export const addDebt = (type, person, amount, description) => {
-  return fetch("https://alluring-mammoth-cave-84100.herokuapp.com/debts", {
+  return fetch(process.env.MONEY_SERVER_URL + "/debts", {
     headers: { "Content-Type": "application/json" },
     method: "POST",
     body: JSON.stringify({
