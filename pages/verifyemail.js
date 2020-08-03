@@ -34,9 +34,19 @@ const Home = ({ isLoggedIn }) => {
       </Head>
       <h1>Email has been verified</h1>
       <div>Please click this link and signin</div>
-      <Link href="/signin">
+      <Link href="/">
         <a>Signin</a>
       </Link>
+      <style jsx>
+        {`
+          body {
+            color: white;
+          }
+          .container {
+            color: white;
+          }
+        `}
+      </style>
     </div>
   );
 };

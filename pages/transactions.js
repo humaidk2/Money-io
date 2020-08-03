@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Transactions from "../components/transaction";
-import Request from "../components/requests";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { useRouter } from "next/router";

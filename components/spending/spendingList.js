@@ -1,5 +1,5 @@
 import SpendingForm from "./spendingForm";
-import SpendingListEntry from "./SpendingListEntry";
+import SpendingListEntry from "./spendingListEntry";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import * as actions from "../../actions/transactions";
