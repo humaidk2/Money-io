@@ -23,5 +23,5 @@ export const addTransaction = (category, title, amount) => {
     method: "POST",
     body: JSON.stringify({ category, title, amount, date: new Date() }),
     credentials: "include",
-  }).then((response) => response.json());
+  });
 };
