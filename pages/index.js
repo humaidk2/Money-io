@@ -92,7 +92,6 @@ const Home = ({ isLoggedIn, signin }) => {
 // by default connect passes dispatch
 // we could add mapStateToProps or mapDispatchToProps
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     isLoggedIn: state.isLoggedIn,
   };

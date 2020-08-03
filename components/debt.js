@@ -4,7 +4,6 @@ import OwesList from "./owes/owesList";
 import { useRouter } from "next/router";
 
 import useSWR from "swr";
-// TODO: Convert to functional component
 export default function Debts(props) {
   const fetcher = (url) =>
     fetch(url, { method: "GET", credentials: "include" }).then((res) =>

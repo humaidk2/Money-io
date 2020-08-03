@@ -1,10 +1,8 @@
 import Head from "next/head";
-// import { connect } from "react-redux";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/Link";
 import useSWR from "swr";
-import { verifyEmail } from "../api/auth";
 
 const fetcher = (url) =>
   fetch(url, { method: "GET", credentials: "include" }).then((res) => {
@@ -40,13 +38,4 @@ const Home = ({ isLoggedIn }) => {
     </div>
   );
 };
-// // by default connect passes dispatch
-// // we could add mapStateToProps or mapDispatchToProps
-// const mapStateToProps = (state) => {
-//   return {
-//     isLoggedIn: state.isLoggedIn,
-//   };
-// };
-
-// export default connect(mapStateToProps)(Home);
 export default Home;

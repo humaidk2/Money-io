@@ -26,7 +26,6 @@ export const addDebt = (type, person, amount, description) => (dispatch) => {
     .then((response) => response.json())
     .then(
       (response) => {
-        console.log(response);
         dispatch({
           type: "ADD_DEBT_SUCCESS",
           response,
@@ -47,7 +46,6 @@ export const deleteDebt = (id) => (dispatch) => {
     .then((response) => response.json())
     .then(
       (response) => {
-        console.log(response);
         dispatch({
           type: "DELETE_DEBT_SUCCESS",
           response,
