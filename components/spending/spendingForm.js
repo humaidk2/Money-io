@@ -5,7 +5,7 @@ import { addTransaction } from "../../actions/transactions";
 const SpendingForm = ({ dispatch }) => {
   const [category, setCategory] = useState("Restaurant");
   const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState(0.0);
+  const [amount, setAmount] = useState("");
 
   const formSubmit = (evt) => {
     evt.preventDefault();

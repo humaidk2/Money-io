@@ -6,7 +6,7 @@ const DuesForm = ({ dispatch }) => {
   const [type, setType] = useState("due");
   const [person, setPerson] = useState("");
   const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
   const formSubmit = (evt) => {
     evt.preventDefault();
     dispatch(addDebt(type, person, amount, description));
