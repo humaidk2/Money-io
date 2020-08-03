@@ -43,10 +43,8 @@ const SpendingList = ({ list, fetchTransactions, deleteTransaction }) => {
 
 // by default connect passes dispatch
 // we could add mapStateToProps or mapDispatchToProps
-const mapStateToProps = (state) => {
-  return {
-    list: state.transactions,
-  };
-};
+const mapStateToProps = (state) => ({
+  list: state.transactions,
+});
 
 export default connect(mapStateToProps, actions)(SpendingList);
