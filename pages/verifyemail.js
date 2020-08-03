@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import Link from "next/Link";
+import Link from "next/link";
 import useSWR from "swr";
 
 const fetcher = (url) =>

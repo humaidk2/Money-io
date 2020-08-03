@@ -1,5 +1,5 @@
 import Head from "next/Head";
-import Link from "next/Link";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import * as actions from "../actions/auth";
