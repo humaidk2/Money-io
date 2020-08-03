@@ -2,8 +2,10 @@ import Link from "next/Link";
 import { useRouter } from "next/router";
 import * as actions from "../actions/auth";
 import { connect } from "react-redux";
+import { AvatarGenerator } from "random-avatar-generator";
 const Sidebar = ({ username, logout }) => {
   const router = useRouter();
+  const generator = new AvatarGenerator();
   const onLogout = (evt) => {
     evt.preventDefault();
     logout();
@@ -16,7 +18,7 @@ const Sidebar = ({ username, logout }) => {
       <li>
         <img
           className="profilepic"
-          src="https://dyn0.media.forbiddenplanet.com/products/102701.jpg.square-true_maxheight-285_size-285.jpg"
+          src={generator.generateRandomAvatar(username)}
         ></img>
       </li>
       <li>
