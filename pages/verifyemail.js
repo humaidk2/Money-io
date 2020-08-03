@@ -16,7 +16,9 @@ const Home = ({ isLoggedIn }) => {
   useEffect(() => {
     isLoggedIn && router.push("/transactions", undefined, { shallow: true });
   });
-  const url = "http://localhost:8000/verifyemail?unique=" + router.query.unique;
+  const url =
+    "https://alluring-mammoth-cave-84100.herokuapp.com/verifyemail?unique=" +
+    router.query.unique;
   const { data, error } = useSWR(url, fetcher);
   if (error) return <div>failed to verify {error.status}</div>;
   if (!data) return <div>loading...</div>;

@@ -10,7 +10,7 @@ export default function Debts(props) {
       res.json()
     );
   const router = useRouter();
-  const url = "http://localhost:8000/debts";
+  const url = "https://alluring-mammoth-cave-84100.herokuapp.com/debts";
   const { data, error } = useSWR(url, fetcher);
   if (error)
     return (
