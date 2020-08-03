@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import * as actions from "../actions/auth";
 import { connect } from "react-redux";
 import { AvatarGenerator } from "random-avatar-generator";
 const Sidebar = ({ username, logout }) => {
-  const router = useRouter();
   const generator = new AvatarGenerator();
   const onLogout = (evt) => {
     evt.preventDefault();
