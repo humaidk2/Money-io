@@ -4,19 +4,41 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import * as actions from "../actions/auth";
 import { connect } from "react-redux";
+import { signup } from "../api/auth";
 
-const Home = ({ isLoggedIn, signup }) => {
+const Home = ({ isLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
+  const [res, setRes] = useState({ data: null, error: null, isLoading: false });
+
   useEffect(() => {
     isLoggedIn && router.push("/transactions", undefined, { shallow: true });
   });
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    signup(username, email, password);
+    // do signup request
+    // if completed successfully
+    // display small span that says please verify email by following link in your email
+    setRes((prevState) => ({ ...prevState, isLoading: true }));
+    signup(username, email, password)
+      .then((res) => {
+        if (res.status != 200)
+          throw { message: "failed to signup", status: res.status };
+        else return res.json();
+      })
+      .then((data) => {
+        setRes({ data: data, isLoading: false, error: null });
+      })
+      .catch((error) => {
+        setRes({ data: null, isLoading: false, error });
+      });
   };
+  if (res.isLoading) return <div>Loading...</div>;
+  if (res.error) return <div>failed to load {error.status}</div>;
+
   return (
     <>
       <Head>
@@ -97,6 +119,11 @@ const Home = ({ isLoggedIn, signup }) => {
                     <button type="submit" className="btn">
                       Sign up
                     </button>
+                    {res.data && (
+                      <span style={{ color: "red" }}>
+                        Please check your email for verification
+                      </span>
+                    )}
                   </form>
                   <br />
                   <Link href="/signin">
