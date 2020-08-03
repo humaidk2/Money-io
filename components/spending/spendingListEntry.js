@@ -5,7 +5,11 @@ const SpendingListEntry = (props) => {
   return (
     <tr>
       <td>
-        <img height="40" src={pickCategories(category)}></img>
+        <img
+          alt={"category icon " + category}
+          height="40"
+          src={"/" + category + ".png"}
+        ></img>
       </td>
       <td>{title}</td>
       <td>{"$ " + amount}</td>
