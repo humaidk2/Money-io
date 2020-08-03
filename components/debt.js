@@ -14,13 +14,11 @@ export default function Debts(props) {
   const { data, error } = useSWR(url, fetcher);
   if (error)
     return (
-      <div>
-        failed to load{router.push("/signin", undefined, { shallow: true })}
-      </div>
+      <div>failed to load{router.push("/", undefined, { shallow: true })}</div>
     );
   if (!data) return <div>Loading...</div>;
   if (data && !data.Message) {
-    router.push("/signin", undefined, { shallow: true });
+    router.push("/", undefined, { shallow: true });
   }
   return (
     <div id="wrapper" className="app">

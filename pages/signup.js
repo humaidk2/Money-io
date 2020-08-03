@@ -126,7 +126,7 @@ const Home = ({ isLoggedIn }) => {
                     )}
                   </form>
                   <br />
-                  <Link href="/signin">
+                  <Link href="/">
                     <a>Sign in</a>
                   </Link>
                 </div>
