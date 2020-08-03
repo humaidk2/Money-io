@@ -8,7 +8,8 @@ export const signin = (username, password) => (dispatch) => {
     )
     .then(
       (response) => {
-        response.isLoggedIn && dispatch({ type: "LOGIN_SUCCESS" });
+        response.isLoggedIn &&
+          dispatch({ type: "LOGIN_SUCCESS", username: response.username });
       },
       (error) => {
         dispatch({

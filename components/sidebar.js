@@ -2,7 +2,7 @@ import Link from "next/Link";
 import { useRouter } from "next/router";
 import * as actions from "../actions/auth";
 import { connect } from "react-redux";
-const Sidebar = ({ logout }) => {
+const Sidebar = ({ username, logout }) => {
   const router = useRouter();
   const onLogout = (evt) => {
     evt.preventDefault();
@@ -20,7 +20,7 @@ const Sidebar = ({ logout }) => {
         ></img>
       </li>
       <li>
-        <p className="username">Chris</p>
+        <p className="username">{username}</p>
       </li>
       <li>
         <Link href="/transactions">
@@ -49,5 +49,8 @@ const Sidebar = ({ logout }) => {
     </ul>
   );
 };
+const mapStateToProps = (state) => ({
+  username: state.isLoggedIn,
+});
 
-export default connect(null, actions)(Sidebar);
+export default connect(mapStateToProps, actions)(Sidebar);
