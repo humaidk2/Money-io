@@ -27,3 +27,11 @@ export const signin = (username, password) => {
     credentials: "include",
   });
 };
+
+export const verifyEmail = (url) => {
+  return fetch("http://localhost:8000/verifyEmail" + url, {
+    headers: { "Content-Type": "application/json" },
+    method: "GET",
+    credentials: "include",
+  });
+};
