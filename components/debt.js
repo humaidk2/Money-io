@@ -10,7 +10,7 @@ export default function Debts(props) {
       res.json()
     );
   const router = useRouter();
-  const url = "https://alluring-mammoth-cave-84100.herokuapp.com/debts";
+  const url = process.env.NEXT_PUBLIC_MONEY_SERVER_URL + "/debts";
   const { data, error } = useSWR(url, fetcher);
   if (error)
     return (
