@@ -4,17 +4,28 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import * as actions from "../actions/auth";
 import { connect } from "react-redux";
+import { GoogleLogin } from "react-google-login";
 
-const Home = ({ isLoggedIn, signin }) => {
+const Home = ({ isLoggedIn, signin, signinGoogle }) => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoginFailure, setIsLoginFailure] = useState(false);
+  // do a get request to check if your logged in
   useEffect(() => {
     isLoggedIn && router.push("/transactions", undefined, { shallow: true });
   }, [isLoggedIn]);
   const handleSubmit = (evt) => {
     evt.preventDefault();
     signin(username, password);
+  };
+  const responseGoogle = (response) => {
+    console.log(response);
+    setIsLoginFailure(true);
+  };
+  const onSuccess = (response) => {
+    console.log(response);
+    signinGoogle(response.tokenId);
   };
   return (
     <>
@@ -74,7 +85,17 @@ const Home = ({ isLoggedIn, signin }) => {
                     <button type="submit" className="btn">
                       Sign in
                     </button>
+                    <GoogleLogin
+                      clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+                      buttonText="Login"
+                      onSuccess={onSuccess}
+                      onFailure={responseGoogle}
+                      cookiePolicy={"single_host_origin"}
+                    />
                   </form>
+                  {isLoginFailure && (
+                    <div className="login-failure">Login failed</div>
+                  )}
                   <br />
                   <Link href="/signup">
                     <a>Sign up</a>
@@ -85,6 +106,11 @@ const Home = ({ isLoggedIn, signin }) => {
           </div>
         </div>
       </div>
+      <style jsx>{`
+        .login-failure {
+          color: red;
+        }
+      `}</style>
     </>
   );
 };
