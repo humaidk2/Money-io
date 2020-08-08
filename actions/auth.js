@@ -53,3 +53,42 @@ export const logout = () => (dispatch) => {
       }
     );
 };
+
+export const signinGoogle = (token) => (dispatch) => {
+  dispatch({ type: "LOGIN_GOOGLE_SUCCESS" });
+  api
+    .verifyGoogle(token)
+    .then((response) =>
+      response.status == 200 ? response.json() : Promise.reject(response)
+    )
+    .then(
+      (response) => {
+        console.log(response);
+        dispatch({ type: "LOGIN_SUCCESS", username: response.username });
+      },
+      (error) => {
+        dispatch({
+          type: "LOGIN_FAILURE",
+        });
+      }
+    );
+};
+
+export const logoutGoogle = () => (dispatch) => {
+  dispatch({ type: "LOGOUT_GOOGLE_SUCESS" });
+  api
+    .logout()
+    .then((response) =>
+      response.status == 200 ? response.json() : Promise.reject(response)
+    )
+    .then(
+      (response) => {
+        dispatch({ type: "LOGOUT_SUCCESS" });
+      },
+      (error) => {
+        dispatch({
+          type: "LOGOUT_FAILURE",
+        });
+      }
+    );
+};
