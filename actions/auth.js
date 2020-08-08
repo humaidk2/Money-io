@@ -76,19 +76,5 @@ export const signinGoogle = (token) => (dispatch) => {
 
 export const logoutGoogle = () => (dispatch) => {
   dispatch({ type: "LOGOUT_GOOGLE_SUCESS" });
-  api
-    .logout()
-    .then((response) =>
-      response.status == 200 ? response.json() : Promise.reject(response)
-    )
-    .then(
-      (response) => {
-        dispatch({ type: "LOGOUT_SUCCESS" });
-      },
-      (error) => {
-        dispatch({
-          type: "LOGOUT_FAILURE",
-        });
-      }
-    );
+  logout();
 };
