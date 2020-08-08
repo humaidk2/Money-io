@@ -63,7 +63,6 @@ export const signinGoogle = (token) => (dispatch) => {
     )
     .then(
       (response) => {
-        console.log(response);
         dispatch({ type: "LOGIN_SUCCESS", username: response.username });
       },
       (error) => {

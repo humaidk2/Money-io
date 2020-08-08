@@ -24,7 +24,6 @@ const Home = ({ isLoggedIn, signin, signinGoogle }) => {
     setIsLoginFailure(true);
   };
   const onSuccess = (response) => {
-    console.log(response);
     signinGoogle(response.tokenId);
   };
   return (

@@ -38,7 +38,7 @@ export const signinGoogle = (username, password) => {
 
 export const verifyEmail = (url) => {
   return fetch(
-    process.env.NEXT_PUBLIC_MONEY_SERVER_URL + "/verifyEmail" + url,
+    process.env.NEXT_PUBLIC_MONEY_SERVER_URL + "/verifyemail" + url,
     {
       headers: { "Content-Type": "application/json" },
       method: "GET",
@@ -48,7 +48,7 @@ export const verifyEmail = (url) => {
 };
 
 export const verifyGoogle = (token) => {
-  return fetch(process.env.NEXT_PUBLIC_MONEY_SERVER_URL + "/verifyGoogle", {
+  return fetch(process.env.NEXT_PUBLIC_MONEY_SERVER_URL + "/verifygoogle", {
     headers: {
       Authorization: token,
       "Content-Type": "application/json",
