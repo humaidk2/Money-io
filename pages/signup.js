@@ -37,7 +37,7 @@ const Home = ({ isLoggedIn }) => {
       });
   };
   if (res.isLoading) return <div>Loading...</div>;
-  if (res.error) return <div>failed to load {error.status}</div>;
+  if (res.error) return <div>failed to load {res.error.status}</div>;
 
   return (
     <>
@@ -75,9 +75,7 @@ const Home = ({ isLoggedIn }) => {
                     onSubmit={handleSubmit}
                   >
                     <div className="form-group">
-                      <label className="sr-only" for="form-username">
-                        Username
-                      </label>
+                      <label className="sr-only">Username</label>
                       <input
                         type="text"
                         name="username"
@@ -89,9 +87,7 @@ const Home = ({ isLoggedIn }) => {
                       />
                     </div>
                     <div className="form-group">
-                      <label className="sr-only" for="form-email">
-                        Email
-                      </label>
+                      <label className="sr-only">Email</label>
                       <input
                         type="text"
                         name="email"
@@ -103,9 +99,7 @@ const Home = ({ isLoggedIn }) => {
                       />
                     </div>
                     <div className="form-group">
-                      <label className="sr-only" for="form-password">
-                        Password
-                      </label>
+                      <label className="sr-only">Password</label>
                       <input
                         type="password"
                         name="password"
