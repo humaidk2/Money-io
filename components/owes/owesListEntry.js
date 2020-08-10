@@ -1,13 +1,13 @@
 import moment from "moment";
 const OwesListEntry = (props) => {
-  const { id, person, type, amount, description, created_at } = props.entry;
+  const { id, person, type, amount, description, date } = props.entry;
   const { onDeleteClick } = props;
   return (
     <tr>
       <td>{person}</td>
       <td>{description}</td>
       <td>{amount}</td>
-      <td>{moment(created_at).fromNow()}</td>
+      <td>{moment(date).fromNow()}</td>
       <td>{type}</td>
       <td>
         <div className="btn-group">

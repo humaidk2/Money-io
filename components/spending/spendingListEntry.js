@@ -1,6 +1,6 @@
 import moment from "moment";
 const SpendingListEntry = (props) => {
-  const { id, category, title, amount, created_at } = props.entry;
+  const { id, category, title, amount, date } = props.entry;
   const { onDeleteClick } = props;
   return (
     <tr>
@@ -13,7 +13,7 @@ const SpendingListEntry = (props) => {
       </td>
       <td>{title}</td>
       <td>{"$ " + amount}</td>
-      <td>{moment(created_at).fromNow()}</td>
+      <td>{moment(date).fromNow()}</td>
       <td>
         <button
           type="button"
