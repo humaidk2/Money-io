@@ -17,7 +17,9 @@ const Home = ({ isLoggedIn }) => {
     isLoggedIn && router.push("/transactions", undefined, { shallow: true });
   });
   const url =
-    process.env.NEXT_PUBLIC_MONEY_SERVER_URL + "/verifyemail?unique=" + router.query.unique;
+    process.env.NEXT_PUBLIC_MONEY_SERVER_URL +
+    "/verifyemail?unique=" +
+    router.query.unique;
   const { data, error } = useSWR(url, fetcher);
   if (error) return <div>failed to verify {error.status}</div>;
   if (!data) return <div>loading...</div>;

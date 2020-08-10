@@ -73,7 +73,7 @@ export const signinGoogle = (token) => (dispatch) => {
     );
 };
 
-export const logoutGoogle = () => (dispatch) => {
+export const logoutGoogle = (logout) => (dispatch) => {
   dispatch({ type: "LOGOUT_GOOGLE_SUCESS" });
   logout();
 };

@@ -3,14 +3,15 @@ import * as actions from "../actions/auth";
 import { connect } from "react-redux";
 import { AvatarGenerator } from "random-avatar-generator";
 import { GoogleLogout } from "react-google-login";
-const Sidebar = ({ username, logout, isGoogleLoggedIn }) => {
+const Sidebar = ({ username, logout, logoutGoogle, isGoogleLoggedIn }) => {
   const generator = new AvatarGenerator();
   const onLogout = (evt) => {
     evt.preventDefault();
-    console.log("logout success");
     logout();
   };
-  const onGoogleLogout = (evt) => {};
+  const onGoogleLogout = () => {
+    logoutGoogle(logout);
+  };
   return (
     <ul className="sidebar-nav" data-toggle="collapse">
       <li className="sidebar-brand">
@@ -49,7 +50,7 @@ const Sidebar = ({ username, logout, isGoogleLoggedIn }) => {
           <GoogleLogout
             clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
             buttonText="Logout"
-            onLogoutSuccess={logout}
+            onLogoutSuccess={onGoogleLogout}
           ></GoogleLogout>
         ) : (
           <button href="logout" onClick={onLogout}>
